@@ -13,7 +13,7 @@ jobs:
       - id: generate
         shell: bash
         run: |
-          printf '%s=%s\n' "json" '[[{"key":"foo","value":{"fruit":"orange","skip":null}}],[{"key":"bar","value":{"fruit":"apple","skip":null}}]]'  >> $GITHUB_OUTPUT
+          printf '%s=%s\n' "json" '[[{"key":"foo","value":{"fruit":"orange"}}],[{"key":"bar","value":{"fruit":"apple"}}]]'  >> $GITHUB_OUTPUT
 
   example:
     needs:

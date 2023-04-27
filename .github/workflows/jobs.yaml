@@ -15,4 +15,3 @@ jobs:
     with:
       key: ${{ matrix.jobs.value.key }}
       fruit: ${{ matrix.jobs.value.fruit }}
-      skip: ${{ matrix.jobs.value.skip }}
