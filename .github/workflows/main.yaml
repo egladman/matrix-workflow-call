@@ -19,6 +19,7 @@ jobs:
     needs:
       - bootstrap
     strategy:
+      max-parallel: 1
       matrix:
         jobs: '${{ fromJSON(needs.bootstrap.outputs.json) }}'
     uses: ./.github/workflows/jobs.yaml
