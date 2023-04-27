@@ -1,0 +1,28 @@
+name: Sample
+on:
+  workflow_call:
+    inputs:
+      key:
+        required: true
+        type: string
+      fruit:
+        required: true
+        type: string
+      skip:
+        required: false
+        type: bool
+
+jobs:
+  sample:
+    name: ${{ inputs.key  }}
+    runs-on: ubuntu-latest
+    env:
+      FRUIT: ${{ inputs.fruit }}
+    steps:
+      - name: Do fake work
+        run: |
+          echo "$FRUIT"
+          for n in {1..60}; do
+            [[ $((n%2)) -eq 0 ]] && echo "tick" || echo "tock"
+            sleep 1
+          done

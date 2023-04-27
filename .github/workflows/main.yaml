@@ -1,0 +1,26 @@
+name: Main
+on:
+  push:
+  workflow_call:
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    outputs:
+      debug-enabled: ${{ steps.debug-check.outputs.enabled }}
+      json: ${{ steps.generate.outputs.json }}
+    steps:
+      - id: generate
+        shell: bash
+        run: |
+          printf '%s=%s\n' "json" '[[{"key":"foo","value":{"fruit":"orange","skip":null}}],[{"key":"bar","value":{"fruit":"apple","skip":null}}]]'  >> $GITHUB_OUTPUT
+
+  example:
+    needs:
+      - bootstrap
+    strategy:
+      matrix:
+        jobs: '${{ fromJSON(needs.generate.outputs.json) }}'
+    uses: ./.github/workflows/jobs.yaml
+    with:
+      payload: ${{ toJSON(matrix.jobs) }}
