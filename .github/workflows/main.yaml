@@ -20,7 +20,7 @@ jobs:
       - bootstrap
     strategy:
       matrix:
-        jobs: '${{ fromJSON(needs.generate.outputs.json) }}'
+        jobs: '${{ fromJSON(needs.bootstrap.outputs.json) }}'
     uses: ./.github/workflows/jobs.yaml
     with:
       payload: ${{ toJSON(matrix.jobs) }}
